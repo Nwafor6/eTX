@@ -32,7 +32,11 @@ login_form.addEventListener('submit',e=>{
                     Sign In
                   </button>`
 				},1000)
+<<<<<<< HEAD
 				window.location.load()
+=======
+				window.location.replace("")
+>>>>>>> 25ff199ab217c79a4fead3eb573a68f31ced50bb
 
 				console.log("got here")
 			},
@@ -45,6 +49,3 @@ login_form.addEventListener('submit',e=>{
 		)
 
 })
-
-
-

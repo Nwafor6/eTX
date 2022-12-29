@@ -47,9 +47,17 @@ let UploadResultNotification=document.querySelector("#uploadresultnotification")
               <span aria-hidden="true">&times;</span>
             </button></div>`
             onetime.innerHTML=`<button id="uploadresulttbn" type="submit" class="btn btn-primary me-2">Upload</button>`
+            document.querySelector("#uploadresultForm").reset()
         },
         error:function(error){
             console.log(error)
+            UploadResultNotification.innerHTML=`<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <small>${error}</small>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button></div>`
+            onetime.innerHTML=`<button id="uploadresulttbn" type="submit" class="btn btn-primary me-2">Upload</button>`
+
         }
     })
 })
@@ -93,10 +101,19 @@ let session_title=document.querySelector("#session_title").value
         dataType: 'json',
         success:function(response){
             IndexAddSessionForm.reset()
-            alert("New Session Added succesful")
+            document.querySelector("#addsessionnotification").innerHTML=`<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <small>${response.session_title} session created successfully </small>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button></div>`
         },
         error:function(error){
-            alert("Session already exist")
+            console.log(error)
+            document.querySelector("#addsessionnotification").innerHTML=`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <small>An Error occured. This session seems to exist already. </small>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button></div>`
         }
     })
 })

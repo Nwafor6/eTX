@@ -24,7 +24,7 @@ $.ajax({
                 ${response[i].session_title}
               </td>
               <td>
-                ${response[i].created}
+               ${response[i].created.slice(5,7)}/${response[i].created.slice(0,4)}
               </td>
                <td>
                 <button type="button" data-id="/v1/update_admittedsession/${response[i].id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>

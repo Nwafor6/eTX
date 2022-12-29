@@ -47,7 +47,11 @@ class CreateAdmittedSession(generics.ListCreateAPIView):
 			serializer=self.serializer_class(admitted_session, many=False)
 			return Response(serializer.data)
 		else:
+<<<<<<< HEAD
 			return Response("You have to create departments first")
+=======
+			return Response("You have to create Departments first !!")
+>>>>>>> 25ff199ab217c79a4fead3eb573a68f31ced50bb
 
 class UpdateAdmittedSession(generics.RetrieveUpdateAPIView):
 	queryset=AdmittedSession.objects.all()
@@ -411,6 +415,7 @@ class examFieldUpload(generics.CreateAPIView):
 					)
 				count+=1
 			return Response(f"upload complete !!! Total= {count}")
+		return Response(f"An error occoured")
 
 #search student by reggistration number and display all courses
 class SearchStudent(generics.CreateAPIView):
