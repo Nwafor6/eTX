@@ -9,7 +9,7 @@ login_form.addEventListener('submit',e=>{
 	$.ajax(
 		{
 			type:'POST',
-			url:"http://127.0.0.1:8000/account/login/",
+			url:"/account/login/",
 			data:{
 				'email': email,
 				'password':password,
@@ -18,9 +18,11 @@ login_form.addEventListener('submit',e=>{
 			success: function(response){
 				login_btn.style.display="none"
 				login_success.style.display="block"
+				console.log(response)
 				setTimeout(()=>{
 				},1000)
-				window.location.href="http://127.0.0.1:8000"
+				window.location.href="etx.pythonanywhere.com"
+				console.log("got here")
 			},
 			error:function(error){
 				console.log(error)
