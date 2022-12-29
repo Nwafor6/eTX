@@ -4,10 +4,10 @@ let response_length=0;
 
 // let clicked_session=document.querySelector(`#session${response[i].id}`)
 
-// GET ALL SESSION 
+// GET ALL SESSION
 $.ajax({
 	type:"GET",
-	url:`${domain}/v1/departments/`,
+	url:`/v1/departments/`,
 	success:function(response){
 		console.log(response)
 		for (i in response){
@@ -21,10 +21,10 @@ $.ajax({
                 ${response[i].title}
               </td>
                <td>
-                <button type="button" data-id="${domain}/v1/departments/${response[i].id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
+                <button type="button" data-id="/v1/departments/${response[i].id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
               </td>
               <td>
-                <a href="${domain}/sessions/${response[i].id}/" class="btn btn-primary border-0 text-white">View</a>
+                <a href="/sessions/${response[i].id}/" class="btn btn-primary border-0 text-white">View</a>
               </td>
               <td data-id="${response[i].id}">
                 <form id="sessiondelform"  method="DELETE" data-id="${response[i].id}">
@@ -35,7 +35,7 @@ $.ajax({
             </tr>
 
 			`
-			
+
 		}
 		response_length=response.length
 	},
@@ -52,7 +52,7 @@ e.preventDefault()
 let title=document.querySelector("#exampleInputUsername1").value
 	$.ajax({
 		type:"POST",
-		url:`${domain}/v1/departments/`,
+		url:`/v1/departments/`,
 		data:{
 			"title":title,
 			'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val(),
@@ -70,7 +70,7 @@ let title=document.querySelector("#exampleInputUsername1").value
             ${response.title}
           </td>
            <td>
-                <a href="${domain}/v1/departments/${response.id}/" class="btn btn-primary border-0 text-white">Edit</a>
+                <a href="/v1/departments/${response.id}/" class="btn btn-primary border-0 text-white">Edit</a>
               </td>
               <td>
                 <a href="" class="btn btn-primary border-0 text-white">View</a>
@@ -160,13 +160,13 @@ document.addEventListener("DOMContentLoaded", function(e) {
                 ${response.title}
               </td>
                <td>
-                <button type="button" data-id="${domain}/v1/departments/${response.id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
+                <button type="button" data-id="/v1/departments/${response.id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
               </td>
               <td>
-                <a href="${domain}/session/${response.id}/students/" class="btn btn-primary border-0 text-white">View</a>
+                <a href="/session/${response.id}/students/" class="btn btn-primary border-0 text-white">View</a>
               </td>
               <td data-id="${response.id}">
-                <form id="sessiondelform" action="${domain}/v1/delete_admittedsession/${response.id}/" method="DELETE" data-id="${response.id}">
+                <form id="sessiondelform" action="/v1/delete_admittedsession/${response.id}/" method="DELETE" data-id="${response.id}">
                 <input type="hidden">
                 <button type="submit" class="btn btn-danger border-0 text-white" data-id="${response.id}" id="ssessiondelbtn">Delete</button>
                 </form>
@@ -226,11 +226,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
 					for (let i=0; i<sessiondelform.length; i++){
 							sessiondelform[i].addEventListener("submit",e=>{
 							e.preventDefault()
-							
+
 
 									$.ajax({
 									type:"DELETE",
-									url:`${domain}/v1/departments/${ssessiondelbtn_id}/`,
+									url:`/v1/departments/${ssessiondelbtn_id}/`,
 									headers: {'X-CSRFToken': getCookie('csrftoken')},
 									success:function(response){
 										let session_del_table= document.querySelector(`#session_del_table${ssessiondelbtn_id}`)
@@ -242,11 +242,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
 										console.log(error)
 
 									}
-								})			
+								})
 					})
 
 					}
-				
+
 		}
 		})
 	}

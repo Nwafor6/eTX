@@ -27,7 +27,7 @@ let AddStudentNotification=document.querySelector("#addstudentnotification")
 	// })
 	$.ajax({
 		type:"POST",
-		url:`${domain}/v1/upload/student/`,
+		url:`/v1/upload/student/`,
 		data:formData,
 		dataType:'json',
 		processData:false,

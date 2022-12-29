@@ -33,7 +33,7 @@ let UploadResultNotification=document.querySelector("#uploadresultnotification")
     // })
     $.ajax({
         type:"POST",
-        url:`${domain}/v1/upload/`,
+        url:`/v1/upload/`,
         data:formData,
         dataType:'json',
         processData:false,
@@ -85,7 +85,7 @@ e.preventDefault()
 let session_title=document.querySelector("#session_title").value
     $.ajax({
         type:"POST",
-        url:`${domain}/v1/departments/1/add_admittedsession/`,
+        url:`/v1/departments/1/add_admittedsession/`,
         data:{
             "session_title":session_title,
         },
@@ -133,7 +133,7 @@ let AddStudentNotification=document.querySelector("#addstudentnotification")
     // })
     $.ajax({
         type:"POST",
-        url:`${domain}/v1/upload/student/`,
+        url:`/v1/upload/student/`,
         data:formData,
         dataType:'json',
         processData:false,

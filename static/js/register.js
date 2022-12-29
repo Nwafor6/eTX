@@ -8,7 +8,7 @@ registerForm.addEventListener('submit',p=>{
 	$.ajax(
 		{
 			type:'POST',
-			url:"http://127.0.0.1:8000/account/register/",
+			url:"etx.pythonanywhere.com/account/register/",
 			data:{
 				'email': email,
 				"first_name":first_name,
@@ -24,7 +24,7 @@ registerForm.addEventListener('submit',p=>{
 				login_success.style.display="block"
 				setTimeout(()=>{
 				},1000)
-				window.location.href="http://127.0.0.1:8000/login/"
+				window.location.href="etx.pythonanywhere.com/login/"
 			},
 			error:function(error){
 				console.log(error)

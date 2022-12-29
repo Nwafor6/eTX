@@ -7,7 +7,7 @@ let domain= document.querySelector("#domain").value
 // GET ALL STUDENTS THE SESSION
 $.ajax({
 	type:"GET",
-	url:`${domain}/v1/department/${Dept_id}/session/${SessionId}/students/`,
+	url:`/v1/department/${Dept_id}/session/${SessionId}/students/`,
 	success:function(response){
     for(i in response){
 
@@ -27,7 +27,7 @@ $.ajax({
                 ${response[i].admitted_session.session_title}
               </td>
               <td>
-                <a href="${domain}/student/${response[i].id}/completed-session/" class="btn btn-primary border-0 text-white">View</a>
+                <a href="/student/${response[i].id}/completed-session/" class="btn btn-primary border-0 text-white">View</a>
               </td>
             </tr>
 
@@ -36,7 +36,7 @@ $.ajax({
     }
     if (response.length ===0){
       Notify.innerHTML =`
-          <strong>No Students Admitted in this Session Yet</strong> 
+          <strong>No Students Admitted in this Session Yet</strong>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -45,7 +45,7 @@ $.ajax({
 
     }
 
-	
+
 	},
 	error:function(error){
 		console.log(error)
@@ -83,7 +83,7 @@ $("#search_form").submit(function(e){
   e.preventDefault();
   $.ajax({
     type:"POST",
-    url:`${domain}/v1/department/${Dept_id}/session/${SessionId}/students/`,
+    url:`/v1/department/${Dept_id}/session/${SessionId}/students/`,
     data:{
       "reg_num":StudentRegNum.value
     },
@@ -108,7 +108,7 @@ $("#search_form").submit(function(e){
                 ${response[i].admitted_session.session_title}
               </td>
               <td>
-                <a href="${domain}/student/${response[i].id}/completed-session/" class="btn btn-primary border-0 text-white">View</a>
+                <a href="/student/${response[i].id}/completed-session/" class="btn btn-primary border-0 text-white">View</a>
               </td>
             </tr>
 
@@ -117,7 +117,7 @@ $("#search_form").submit(function(e){
     }
     if (response.length ===0){
       Notify.innerHTML =`
-          <strong>Student with this registration number does not exist</strong> 
+          <strong>Student with this registration number does not exist</strong>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

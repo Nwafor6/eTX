@@ -15,7 +15,7 @@ let TranscriptName=""
 // GET ALL STUDENTS THE SESSION
 $.ajax({
 	type:"GET",
-	url:`${domain}/v1/student/${Stud_id}/session/`,
+	url:`/v1/student/${Stud_id}/session/`,
 	success:function(response){
     let SessionResponse=response
     index=1;
@@ -27,7 +27,7 @@ $.ajax({
 
             <tr class="" id="session_del_table">
                     <td>
-                      ${index} 
+                      ${index}
                     </td>
                     <td>
                       ${semester.session.session_title}
@@ -45,8 +45,8 @@ $.ajax({
 
       })
     })
-    
-	
+
+
 	},
 	error:function(error){
 		console.log(error)
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       Sess_id=this.dataset.sess_id
       $.ajax({
         type:"GET",
-        url:`${domain}/v1/student/${Stud_id}/session/${Sess_id}/semester/${Sems_id}/`,
+        url:`/v1/student/${Stud_id}/session/${Sess_id}/semester/${Sems_id}/`,
         success:function(res){
           console.log(res)
           results=res
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
             Session_.innerText=result.session.session_title
             if(result.semester.title=="First Semester"){
 
-            
+
               TranscriptTable.innerHTML +=`
                  <tr>
                     <td>
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
                     <td>
                       ${result.quality_point}
                     </td>
-                  </tr>  
+                  </tr>
 
               `
               index +=1
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
           results.forEach(result=>{
             if(result.semester.title=="Second Semester"){
 
-            
+
               SecondSemesterTranscript.innerHTML +=`
                  <tr>
                     <td>
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
                     <td>
                       ${result.quality_point}
                     </td>
-                  </tr> 
+                  </tr>
 
               `
               index2 +=1
@@ -171,7 +171,7 @@ PdfButton.addEventListener("click",function(){
             html2canvas:  { scale: 1 },
             jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait',precision: '12' }
           };
-        
+
         // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
         html2pdf().set(opt).from(element).save();
         setTimeout(()=>{

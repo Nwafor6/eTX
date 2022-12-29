@@ -5,10 +5,10 @@ let response_length=0;
 
 // let clicked_session=document.querySelector(`#session${response[i].id}`)
 
-// GET ALL SESSION 
+// GET ALL SESSION
 $.ajax({
 	type:"GET",
-	url:`${domain}/v1/departments/${DepartmentId}/add_admittedsession/`,
+	url:`/v1/departments/${DepartmentId}/add_admittedsession/`,
 	success:function(response){
 		for (i in response){
 			sessions_holder.innerHTML +=`
@@ -24,13 +24,13 @@ $.ajax({
                 ${response[i].created}
               </td>
                <td>
-                <button type="button" data-id="${domain}/v1/update_admittedsession/${response[i].id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
+                <button type="button" data-id="/v1/update_admittedsession/${response[i].id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
               </td>
               <td>
-                <a href="${domain}/dept/${DepartmentId}/session/${response[i].id}/students/" class="btn btn-primary border-0 text-white">View</a>
+                <a href="/dept/${DepartmentId}/session/${response[i].id}/students/" class="btn btn-primary border-0 text-white">View</a>
               </td>
               <td data-id="${response[i].id}">
-                <form id="sessiondelform" action="${domain}/v1/delete_admittedsession/${response[i].id}/" method="DELETE" data-id="${response[i].id}">
+                <form id="sessiondelform" action="/v1/delete_admittedsession/${response[i].id}/" method="DELETE" data-id="${response[i].id}">
                 <input type="hidden">
                 <button type="submit" class="btn btn-danger border-0 text-white" data-id="${response[i].id}" id="ssessiondelbtn">Delete</button>
                 </form>
@@ -38,7 +38,7 @@ $.ajax({
             </tr>
 
 			`
-			
+
 		}
 		response_length=response.length
 		// console.log(response_length)

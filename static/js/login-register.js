@@ -10,22 +10,29 @@ login_form.addEventListener('submit',e=>{
 	$.ajax(
 		{
 			type:'POST',
-			url:"http://127.0.0.1:8000/account/login/",
+			url:"/account/login/",
 			data:{
 				'email': email,
 				'password':password,
 			},
 			dataType:'json',
 			success: function(response){
+<<<<<<< HEAD
 				LoginResponse.innerHTML=`<div class="alert alert-success" role="alert" id="login-success" >
                     ${response} 
                   </div>`
+=======
+				login_btn.style.display="none"
+				login_success.style.display="block"
+				console.log(response)
+>>>>>>> refs/remotes/origin/master
 				setTimeout(()=>{
 					LoginResponse.innerHTML=`<button type="submit" class="btn btn-block btn-facebook auth-form-btn" id="login-btn">
                     Sign In
                   </button>`
 				},1000)
-				window.location.href="http://127.0.0.1:8000"
+				window.location.href="etx.pythonanywhere.com"
+				console.log("got here")
 			},
 			error:function(error){
 				console.log(error)
