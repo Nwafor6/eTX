@@ -20,8 +20,9 @@ login_form.addEventListener('submit',e=>{
 			success: function(response){
 
 				LoginResponse.innerHTML=`<div class="alert alert-success" role="alert" id="login-success" >
-                    ${response} 
+                    ${response}
                   </div>`
+
 
 				login_btn.style.display="none"
 				login_success.style.display="block"
@@ -31,7 +32,8 @@ login_form.addEventListener('submit',e=>{
                     Sign In
                   </button>`
 				},1000)
-				window.location.reload()
+				window.location.replace("")
+
 				console.log("got here")
 			},
 			error:function(error){
@@ -43,6 +45,3 @@ login_form.addEventListener('submit',e=>{
 		)
 
 })
-
-
-

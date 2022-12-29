@@ -38,13 +38,16 @@ class CreateAdmittedSession(generics.ListCreateAPIView):
 
 	def post(self, request, *args, **kwargs):
 		session_title=request.POST["session_title"]
-		admitted_session=AdmittedSession.objects.create(session_title=session_title)
-		Semester.objects.create(title="First Semester", session=admitted_session)
-		Semester.objects.create(title="Second Semester", session=admitted_session)
-		for department in Department.objects.all():
-			admitted_session.department.add(department)
-		serializer=self.serializer_class(admitted_session, many=False)
-		return Response(serializer.data)
+		if Department.objects.all().count() > 0:
+			admitted_session=AdmittedSession.objects.create(session_title=session_title)
+			Semester.objects.create(title="First Semester", session=admitted_session)
+			Semester.objects.create(title="Second Semester", session=admitted_session)
+			for department in Department.objects.all():
+				admitted_session.department.add(department)
+			serializer=self.serializer_class(admitted_session, many=False)
+			return Response(serializer.data)
+		else:
+			return Response("You have to create Departments first !!")
 
 class UpdateAdmittedSession(generics.RetrieveUpdateAPIView):
 	queryset=AdmittedSession.objects.all()
@@ -408,6 +411,7 @@ class examFieldUpload(generics.CreateAPIView):
 					)
 				count+=1
 			return Response(f"upload complete !!! Total= {count}")
+		return Response(f"An error occoured")
 
 #search student by reggistration number and display all courses
 class SearchStudent(generics.CreateAPIView):
