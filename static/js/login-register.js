@@ -2,6 +2,7 @@ let login_form=document.querySelector("#login-form")
 let login_success=document.querySelector("#login-success")
 let LoginResponse=document.querySelector("#login_response")
 let login_btn=document.querySelector("#login-btn")
+console.log("login")
 login_form.addEventListener('submit',e=>{
 	e.preventDefault()
 	let email= document.querySelector("#exampleInputEmail1").value
@@ -17,21 +18,18 @@ login_form.addEventListener('submit',e=>{
 			},
 			dataType:'json',
 			success: function(response){
-<<<<<<< HEAD
 				LoginResponse.innerHTML=`<div class="alert alert-success" role="alert" id="login-success" >
-                    ${response} 
+                    ${response}
                   </div>`
-=======
 				login_btn.style.display="none"
 				login_success.style.display="block"
 				console.log(response)
->>>>>>> refs/remotes/origin/master
 				setTimeout(()=>{
 					LoginResponse.innerHTML=`<button type="submit" class="btn btn-block btn-facebook auth-form-btn" id="login-btn">
                     Sign In
                   </button>`
 				},1000)
-				window.location.href="etx.pythonanywhere.com"
+				window.location.replace("etx.pythonanywhere.com")
 				console.log("got here")
 			},
 			error:function(error){
@@ -44,5 +42,5 @@ login_form.addEventListener('submit',e=>{
 
 })
 
-console.log("login")
+
 
