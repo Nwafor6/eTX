@@ -86,3 +86,51 @@ class StudentSemesterCourse(generics.RetrieveAPIView):
     courses=semester.course_set.filter(student=self.kwargs['pk'], semester=semester )
     serializer=ModifedCourseSerializer(complete_courses, many=True)
     return Response(serializer.data)
+
+
+
+
+
+
+
+
+
+
+
+
+    <script >
+        let login_form=document.querySelector("#login-form")
+        let login_success=document.querySelector("#login-success")
+        let login_btn=document.querySelector("#login-btn")
+        login_form.addEventListener('submit',e=>{
+          e.preventDefault()
+          let email= document.querySelector("#exampleInputEmail1").value
+          let password= document.querySelector("#exampleInputPassword1").value
+
+          $.ajax(
+            {
+              type:'POST',
+              url:"/account/login/",
+              data:{
+                'email': email,
+                'password':password,
+              },
+              dataType:'json',
+              success: function(response){
+                login_btn.style.display="none"
+                login_success.style.display="block"
+                console.log(response)
+                setTimeout(()=>{
+                },1000)
+                window.location.replace("etx.pythonanywhere.com")
+                console.log("got here")
+              },
+              error:function(error){
+                console.log(error)
+              }
+            }
+
+            )
+
+        })
+    </script>

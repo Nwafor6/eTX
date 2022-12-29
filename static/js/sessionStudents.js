@@ -14,7 +14,7 @@ $.ajax({
 
       Session.innerHTML +=`
 
-      <tr class="tlable-info" id="session_del_table${response[i].id}">
+      <tr class="" id="session_del_table${response[i].id}">
               <td>
                 ${response[i].name}
               </td>
@@ -95,7 +95,7 @@ $("#search_form").submit(function(e){
 
       Session.innerHTML =`
 
-      <tr class="tablle-info" id="session_del_table${response[i].id}">
+      <tr class="" id="session_del_table${response[i].id}">
               <td>
                 ${response[i].name}
               </td>

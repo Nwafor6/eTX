@@ -18,9 +18,17 @@ login_form.addEventListener('submit',e=>{
 			},
 			dataType:'json',
 			success: function(response){
+<<<<<<< HEAD
+=======
+
+>>>>>>> d461b623e576dd5ea82f8b7a0969667ebfc58007
 				LoginResponse.innerHTML=`<div class="alert alert-success" role="alert" id="login-success" >
                     ${response}
                   </div>`
+<<<<<<< HEAD
+=======
+
+>>>>>>> d461b623e576dd5ea82f8b7a0969667ebfc58007
 				login_btn.style.display="none"
 				login_success.style.display="block"
 				console.log(response)
@@ -29,7 +37,11 @@ login_form.addEventListener('submit',e=>{
                     Sign In
                   </button>`
 				},1000)
+<<<<<<< HEAD
 				window.location.replace("etx.pythonanywhere.com")
+=======
+				window.location.reload()
+>>>>>>> d461b623e576dd5ea82f8b7a0969667ebfc58007
 				console.log("got here")
 			},
 			error:function(error){
