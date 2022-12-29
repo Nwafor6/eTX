@@ -380,7 +380,7 @@ class examFieldUpload(generics.CreateAPIView):
 					return Response(f" Department '{department}' does not exist, you may need to check spelling to create it!!")
 
 				try:
-					semester=Semester.objects.filter(title__icontains=semester, session=session)
+					semester=Semester.objects.get(title=semester, session=session)
 				except:
 					semester=data[4]
 					transaction.set_rollback(True)# roll back if this error causes error
