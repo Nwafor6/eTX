@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from .resources import StudentResources
 from tablib import Dataset
 from .models import (AdmittedSession,Semester,Student,SessionCompleted,Course,Department)
-from .serializers import (DepartmentSerializer,AdmittedSessionSerializer,SemesterSerializer,StudentSerializer,SessionCompletedSerializer,CourseSerializer, 
+from .serializers import (DepartmentSerializer,AdmittedSessionSerializer,SemesterSerializer,StudentSerializer,SessionCompletedSerializer,CourseSerializer,
 	ExamFieldUploadSerializer,SudentFieldUploadSerializer,SearchSudentSerializer,ModifedAdmittedSessionSerializer)
 
 # extra serializer imports
@@ -38,13 +38,16 @@ class CreateAdmittedSession(generics.ListCreateAPIView):
 
 	def post(self, request, *args, **kwargs):
 		session_title=request.POST["session_title"]
-		admitted_session=AdmittedSession.objects.create(session_title=session_title)
-		Semester.objects.create(title="First Semester", session=admitted_session)
-		Semester.objects.create(title="Second Semester", session=admitted_session)
-		for department in Department.objects.all():
-			admitted_session.department.add(department)
-		serializer=self.serializer_class(admitted_session, many=False)
-		return Response(serializer.data)
+		if Department.objects.all().count() > 0:
+			admitted_session=AdmittedSession.objects.create(session_title=session_title)
+			Semester.objects.create(title="First Semester", session=admitted_session)
+			Semester.objects.create(title="Second Semester", session=admitted_session)
+			for department in Department.objects.all():
+				admitted_session.department.add(department)
+			serializer=self.serializer_class(admitted_session, many=False)
+			return Response(serializer.data)
+		else:
+			return Response("You have to create departments first")
 
 class UpdateAdmittedSession(generics.RetrieveUpdateAPIView):
 	queryset=AdmittedSession.objects.all()
@@ -140,7 +143,7 @@ class DestroySessionCompleted(generics.DestroyAPIView):
 	serializer_class=SessionCompletedSerializer
 	permission_classes=[IsAuthenticated]
 
-	
+
 	def delete(self, request, *args, **kwargs):
 		self.object = self.get_object()
 		self.object.delete()
@@ -178,7 +181,7 @@ class DestroyCourse(generics.DestroyAPIView):
 
 # view all students admitted in the same year######
 class AdmittedSessionStudents(generics.RetrieveUpdateAPIView):
-	
+
 	queryset=AdmittedSession.objects.all()
 	serializer_class=AdmittedSessionSerializer
 	permission_classes=[IsAuthenticated]
@@ -223,7 +226,7 @@ class AdmittedSessionStudents(generics.RetrieveUpdateAPIView):
 
 
 
-# view all sessions completed by the student 
+# view all sessions completed by the student
 class StudentCompletedSession(generics.RetrieveAPIView):
 	queryset=Student.objects.all()
 	serializer_class=StudentSerializer
@@ -389,7 +392,7 @@ class examFieldUpload(generics.CreateAPIView):
 					student=data[5]
 					transaction.set_rollback(True)# roll back if this error causes error
 					return Response(f"Student with the Registration number {student} does not exist")
-				
+
 				print(data[1], data[2], data[3],data[4],data[5],data[6], data[7],data[9], data[10])
 				coure=Course.objects.create(
 
