@@ -2,6 +2,7 @@ let sessions_holder=document.querySelector("#sessions_holder")
 let domain= document.querySelector("#domain").value
 let DepartmentId=document.querySelector("#department_id").value
 let response_length=0;
+console.log("session.js working")
 
 // let clicked_session=document.querySelector(`#session${response[i].id}`)
 

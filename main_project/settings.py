@@ -27,7 +27,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-ze#orz@61tav54
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ["etx.pythonanywhere.com"]
+ALLOWED_HOSTS = ["etx.pythonanywhere.com", "127.0.0.1"]
 
 
 # Application definition

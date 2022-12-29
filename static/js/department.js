@@ -1,6 +1,7 @@
 let sessions_holder=document.querySelector("#sessions_holder")
 let domain= document.querySelector("#domain").value
 let response_length=0;
+console.log("Hello workingxxx")
 
 // let clicked_session=document.querySelector(`#session${response[i].id}`)
 
@@ -13,7 +14,7 @@ $.ajax({
 		for (i in response){
 			sessions_holder.innerHTML +=`
 
-			<tr class="table-info" id="session_del_table${response[i].id}">
+			<tr class="" id="session_del_table${response[i].id}">
               <td>
                 ${response[i].id}
               </td>
@@ -62,7 +63,7 @@ let title=document.querySelector("#exampleInputUsername1").value
 
 				sessions_holder.innerHTML +=`
 
-				<tr class="table-info">
+				<tr class="">
           <td>
             ${response.id}
           </td>
@@ -152,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 						updateSessionForm.reset()
 						document.querySelector(`#session_del_table${response.id}`).innerHTML=`
 
-						<tr class="table-info" id="session_del_table${response.id}">
+						<tr class="" id="session_del_table${response.id}">
               <td>
                 ${response.id}
               </td>

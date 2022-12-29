@@ -13,7 +13,7 @@ $.ajax({
 		for (i in response){
 			sessions_holder.innerHTML +=`
 
-			<tr class="table-info" id="session_del_table${response[i].id}">
+			<tr class="" id="session_del_table${response[i].id}">
               <td>
                 ${response[i].id}
               </td>
