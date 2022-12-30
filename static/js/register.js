@@ -8,7 +8,7 @@ registerForm.addEventListener('submit',p=>{
 	$.ajax(
 		{
 			type:'POST',
-			url:"etx.pythonanywhere.com/account/register/",
+			url:"/account/register/",
 			data:{
 				'email': email,
 				"first_name":first_name,
@@ -24,10 +24,13 @@ registerForm.addEventListener('submit',p=>{
 				login_success.style.display="block"
 				setTimeout(()=>{
 				},1000)
-				window.location.href="etx.pythonanywhere.com/login/"
+				window.location.replace("etx.pythonanywhere.com/login/")
 			},
 			error:function(error){
 				console.log(error)
+				//var err = JSON.parse(xhr.responseText);
+			       _successReg.innerHTML=` <div class="alert alert-danger" role="alert" id="login-success">
+                  		Error ! This user seems to exist </div>`
 			}
 		}
 

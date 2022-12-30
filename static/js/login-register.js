@@ -53,7 +53,6 @@ login_form.addEventListener('submit',e=>{
                   </button>`
 				},1000)
 
-				window.location.load()
 				window.location.replace("")
 
 				console.log("got here")
