@@ -24,6 +24,7 @@ urlpatterns = [
     path('v1/', include('mainapp.urls')),
     path('account/', include('accounts.urls')),
     path('', include('frontendapp.urls')),
+    path("", include("pwa.urls")),
 
 
 

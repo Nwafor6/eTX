@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'import_export',
     'drf_yasg',
     'corsheaders',
+    "pwa",
 ]
 
 MIDDLEWARE = [
@@ -143,6 +144,30 @@ USE_I18N = True
 USE_TZ = True
 
 
+# pwa setup
+PWA_APP_NAME = "eTX"
+PWA_APP_DESCRIPTION = "eTX PWA" #app description
+PWA_APP_THEME_COLOR = "#000000" # theme color
+PWA_APP_BACKGROUND_COLOR = "#ffffff"
+PWA_APP_DISPLAY = "standalone"
+PWA_APP_SCOPE = "/"
+PWA_APP_ORIENTATION = "any"
+PWA_APP_START_URL = "/"
+PWA_APP_STATUS_BAR_COLOR = "default"
+# PWA_APP_ICONS = [{"src": "static/images/app.jpeg", "sizes": "160x160"}]
+PWA_APP_ICONS = [{"src": "static/images/NAAGS.png", "sizes": "640x640"}] # app icon
+# PWA_APP_ICONS_APPLE = [{"src": "static/images/app.jpeg", "sizes": "160x160"}]
+PWA_APP_ICONS_APPLE = [{"src": "static/images/NAAGS.png", "sizes": "640x640"}] # app icon apple
+PWA_APP_SPLASH_SCREEN = [
+    {
+        "src": "static/images/UNIZIK.png",
+        "media": "(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)",
+    }
+] # when your app open (splash screen)
+PWA_APP_DIR = "ltr"
+PWA_APP_LANG = "en-US"
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -151,6 +176,7 @@ STATIC_ROOT = os.path.join(BASE_DIR / "staticfiles")
 STATIC_URL='/static/'
 MEDIA_URL='/media/'
 MEDIA_ROOT= os.path.join( BASE_DIR/'media/')
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, "static/js", "serviceworker.js")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
