@@ -40,19 +40,19 @@ login_form.addEventListener('submit',e=>{
 			dataType:'json',
 			success: function(response){
 
-				LoginResponse.innerHTML=`<div class="alert alert-success" role="alert" id="login-success" >
+				LoginResponse.innerHTML=`<div class="alert alert-primary" role="alert" id="login-success" >
                     ${response}
                   </div>`
 
 
 				login_btn.style.display="none"
+				// login_success.style.display="block"
 				console.log(response)
 				setTimeout(()=>{
 					LoginResponse.innerHTML=`<button type="submit" class="btn btn-block btn-facebook auth-form-btn" id="login-btn">
                     Sign In
                   </button>`
 				},1000)
-
 				window.location.replace("")
 
 				console.log("got here")

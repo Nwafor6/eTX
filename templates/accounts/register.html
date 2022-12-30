@@ -26,11 +26,7 @@
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
             <!-- start success -->
-	   <div id="_successReg">
-           	 <div class="alert alert-success" role="alert" id="login-success" style="display: none;">
-                	  Successful redirecting.....
-           	 </div>
-	    </div>
+	 
             <!-- end of success -->
             <div class="auth-form-light text-left py-5 px-4 px-sm-5" id="form_parent">
               <div class="brand-logo">
@@ -40,6 +36,10 @@
               <h6 class="font-weight-light">Sign in to continue.</h6>
               <form class="pt-3" id="registerForm" method="POST">
                 {%csrf_token%}
+                <div id="_successReg">
+                  
+                  <!--  -->
+                </div>
                 <div class="form-group">
                   <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username" required>
                 </div>
