@@ -5,22 +5,6 @@ let login_btn=document.querySelector("#login-btn")
 console.log("login22")
 
 
-// const ShowPassword=document.querySelector('#show-password');
-// const password= document.querySelector('#exampleInputPassword1');
-// 	showPassword.addEventListener('click', function(e){
-// 	console.log('hello');
-// 	const type = password.getAttribute('type')==='password' ? 'text' : 'password';
-// 	password.setAttribute('type', type);
-// 	this.classList.toggle('fa-eye-slash');
-// })
-
-// $("#showpassword").on('click',function(e){
-// 	console.log("working fine")
-// 	$("#exampleInputPassword1").attr(attribute);
-// 	// ("type")==="password" ? "text" : "password";
-// 	// alert($(this).html());
-// 	console.log(event.target,"event.tartget")
-// });
 $(document).ready(function(){
 	$("#showpassword").change(function(){
 		// check the checkbox state
@@ -69,11 +53,9 @@ login_form.addEventListener('submit',e=>{
                     Sign In
                   </button>`
 				},1000)
-<<<<<<< HEAD
+
 				window.location.load()
-=======
 				window.location.replace("")
->>>>>>> 25ff199ab217c79a4fead3eb573a68f31ced50bb
 
 				console.log("got here")
 			},
