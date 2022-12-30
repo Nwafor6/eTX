@@ -46,7 +46,6 @@ login_form.addEventListener('submit',e=>{
 
 
 				login_btn.style.display="none"
-				login_success.style.display="block"
 				console.log(response)
 				setTimeout(()=>{
 					LoginResponse.innerHTML=`<button type="submit" class="btn btn-block btn-facebook auth-form-btn" id="login-btn">
