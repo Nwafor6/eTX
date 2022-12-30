@@ -2,7 +2,44 @@ let login_form=document.querySelector("#login-form")
 let login_success=document.querySelector("#login-success")
 let LoginResponse=document.querySelector("#login_response")
 let login_btn=document.querySelector("#login-btn")
-console.log("login")
+console.log("login22")
+
+
+// const ShowPassword=document.querySelector('#show-password');
+// const password= document.querySelector('#exampleInputPassword1');
+// 	showPassword.addEventListener('click', function(e){
+// 	console.log('hello');
+// 	const type = password.getAttribute('type')==='password' ? 'text' : 'password';
+// 	password.setAttribute('type', type);
+// 	this.classList.toggle('fa-eye-slash');
+// })
+
+// $("#showpassword").on('click',function(e){
+// 	console.log("working fine")
+// 	$("#exampleInputPassword1").attr(attribute);
+// 	// ("type")==="password" ? "text" : "password";
+// 	// alert($(this).html());
+// 	console.log(event.target,"event.tartget")
+// });
+$(document).ready(function(){
+	$("#showpassword").change(function(){
+		// check the checkbox state
+		if($(this).is(':checked')){
+			// change type attribute
+			$("#exampleInputPassword1").attr("type","text");
+
+			// change the text
+			$("#toggletext").text("Hide password");
+		}else{
+			// change type attribute
+			$("#exampleInputPassword1").attr("type","password")
+			// change text
+			$("#toggletext").text("Show password")
+		}
+	});
+});
+
+
 login_form.addEventListener('submit',e=>{
 	e.preventDefault()
 	let email= document.querySelector("#exampleInputEmail1").value
