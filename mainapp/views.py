@@ -47,7 +47,7 @@ class CreateAdmittedSession(generics.ListCreateAPIView):
 			serializer=self.serializer_class(admitted_session, many=False)
 			return Response(serializer.data)
 		else:
-			return Response("You have to create Departments first !!")
+			return Response({'session_title':"You have to create Departments first !!"})
 
 class UpdateAdmittedSession(generics.RetrieveUpdateAPIView):
 	queryset=AdmittedSession.objects.all()

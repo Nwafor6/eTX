@@ -101,7 +101,7 @@ let session_title=document.querySelector("#session_title").value
         dataType: 'json',
         success:function(response){
             IndexAddSessionForm.reset()
-            document.querySelector("#addsessionnotification").innerHTML=`<div class="alert alert-success alert-dismissible fade show" role="alert">
+            document.querySelector("#addsessionnotification").innerHTML=`<div class="alert alert-primary alert-dismissible fade show" role="alert">
             <small>${response.session_title} session created successfully </small>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -110,7 +110,7 @@ let session_title=document.querySelector("#session_title").value
         error:function(error){
             console.log(error)
             document.querySelector("#addsessionnotification").innerHTML=`<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <small>An Error occured. This session seems to exist already. </small>
+            <small>An Error occured due to either 1: this session seems to exist already or cannot be attacted to any department. Contact ICT for help or reload your browser and try again</small>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button></div>`
