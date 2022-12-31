@@ -1,6 +1,9 @@
+console.log("working")
 let Session=document.querySelector("#students_holder")
 let Stud_id= document.querySelector("#stud_id").value
 let TranscriptTable=document.querySelector("#transcript_body")
+let FirstTranscriptTotal=document.querySelector("#total_body")
+let SecondTranscriptTotal=document.querySelector("#total_seon_body")
 let SecondSemesterTranscript=document.querySelector("#Second_transcript_body")
 let StdName=document.querySelector("#std_name")
 
@@ -12,9 +15,11 @@ let Session_=document.querySelector("#session_")
 let domain= document.querySelector("#domain").value
 let TranscriptName=""
 
+
 // GET ALL STUDENTS THE SESSION
 $.ajax({
 	type:"GET",
+  cache:false,
 	url:`/v1/student/${Stud_id}/session/`,
 	success:function(response){
     let SessionResponse=response
@@ -54,98 +59,154 @@ $.ajax({
 })
 
 // Allow the DOM to load
-document.addEventListener("DOMContentLoaded", function(e) {
-  Sems_id=""
-  Sess_id=""
-  let SemesterBtn=document.querySelectorAll("#semester_btn")
-  SemesterBtn.forEach(btn=>{
-    btn.addEventListener("click",function(){
-      TranscriptTable.innerHTML =""
-      SecondSemesterTranscript.innerHTML =""
-      Sems_id=this.dataset.sems_id
-      Sess_id=this.dataset.sess_id
-      $.ajax({
-        type:"GET",
-        url:`/v1/student/${Stud_id}/session/${Sess_id}/semester/${Sems_id}/`,
-        success:function(res){
-          console.log(res)
-          results=res
-          index=1
-          index2=1
-          results.forEach(result=>{
-            StdName.innerText = result.student.name
-            TranscriptName=result.student.name
-            StdRegNum.innerText=result.student.reg_number
-            // Semester_.innerText=result.semester.title
-            Session_.innerText=result.session.session_title
-            if(result.semester.title=="First Semester"){
+$(document).ready(function(){
+    // document.addEventListener("DOMContentLoaded", function(e) {
+      Sems_id=""
+      Sess_id=""
+      let SemesterBtn=document.querySelectorAll("#semester_btn")
+      SemesterBtn.forEach(btn=>{
+        btn.addEventListener("click",function(){
+          console.log("clicked")
+          TranscriptTable.innerHTML =""
+          SecondSemesterTranscript.innerHTML =""
+          Sems_id=this.dataset.sems_id
+          Sess_id=this.dataset.sess_id
+          $.ajax({
+            type:"GET",
+            cache:false,
+            url:`/v1/student/${Stud_id}/session/${Sess_id}/semester/${Sems_id}/`,
+            success:function(res){
+              console.log(res)
+              results=res
+              index=1
+              index2=1
+              results.forEach(result=>{
+                StdName.innerText = result.student.name
+                TranscriptName=result.student.name
+                StdRegNum.innerText=result.student.reg_number
+                // Semester_.innerText=result.semester.title
+                Session_.innerText=result.session.session_title
+                if(result.semester.title=="First Semester"){
 
 
-              TranscriptTable.innerHTML +=`
-                 <tr>
-                    <td>
-                      ${index}
-                    </td>
-                    <td>
-                      ${result.course_code}
-                    </td>
-                    <td>
-                      ${result.course_title}
-                    </td>
-                    <td>
-                      ${result.credit_load}
-                    </td>
-                    <td>
-                      ${result.grade}
-                    </td>
-                    <td>
-                      ${result.quality_point}
-                    </td>
-                  </tr>
+                  TranscriptTable.innerHTML +=`
+                     <tr>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${index}
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${result.course_code}
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${result.course_title}
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${result.credit_load}
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${result.grade}
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${result.quality_point}
+                        </td>
+                      </tr>
 
-              `
-              index +=1
-            };
+                  `
+                  index +=1
+                   // for the total and other stuffs
+                   FirstTranscriptTotal.innerHTML =`
+                         <tr>
+                            <td style="padding: 0.25rem  0.9375rem !important">
+                              
+                            </td>
+                            <td style="padding: 0.25rem  0.9375rem !important">
+                            
+                            </td>
+                            <td style="padding: 0.25rem  0.9375rem !important">
+                              
+                            </td>
+                            <td style="padding: 0.25rem  0.9375rem !important">
+                              <strong>Total Point:</strong>
+                            </td>
+                            <td style="padding: 0.25rem  0.9375rem !important">
+                              
+                            </td>
+                            <td style="padding: 0.25rem  0.9375rem !important">
+                              <strong>Total Q-Point:</strong>
+                            </td>
+                          </tr>
+
+                      `
+                      // end for total and other stuffs
+                };
+              })
+             
+              // Seoond semester computation
+              results.forEach(result=>{
+                if(result.semester.title=="Second Semester"){
+
+
+                  SecondSemesterTranscript.innerHTML +=`
+                     <tr>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${index2}
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${result.course_code}
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${result.course_title}
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${result.credit_load}
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${result.grade}
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          ${result.quality_point}
+                        </td>
+                      </tr>
+
+                  `
+                  index2 +=1
+                  // for the second semster point total
+                   SecondTranscriptTotal.innerHTML =`
+                     <tr>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                        
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          <strong>Total Point:</strong>
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          
+                        </td>
+                        <td style="padding: 0.25rem  0.9375rem !important">
+                          <strong>Total Q-Point:</strong>
+                        </td>
+                      </tr>
+
+                  `
+                  // end point
+                };
+              })
+
+
+            },
+            error:function(err){
+              console.log(err)
+            }
           })
-          // Seoond semester computation
-          results.forEach(result=>{
-            if(result.semester.title=="Second Semester"){
-
-
-              SecondSemesterTranscript.innerHTML +=`
-                 <tr>
-                    <td>
-                      ${index2}
-                    </td>
-                    <td>
-                      ${result.course_code}
-                    </td>
-                    <td>
-                      ${result.course_title}
-                    </td>
-                    <td>
-                      ${result.credit_load}
-                    </td>
-                    <td>
-                      ${result.grade}
-                    </td>
-                    <td>
-                      ${result.quality_point}
-                    </td>
-                  </tr>
-
-              `
-              index2 +=1
-            };
-          })
-
-        },
-        error:function(err){
-          console.log(err)
-        }
+        })
       })
-    })
-  })
+    // })
 })
 
 let PdfButton=document.querySelector("#pdfButton")

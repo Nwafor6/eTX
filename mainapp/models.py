@@ -32,7 +32,7 @@ class Semester(models.Model):
 		return f"{self.title} | {self.session}"
 
 class Student(models.Model):
-	admitted_session=models.ForeignKey(AdmittedSession, on_delete=models.SET_NULL, null=True, blank=True)
+	admitted_session=models.ForeignKey(AdmittedSession, on_delete=models.SET_NULL, null=True, blank=False)
 	department=models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
 	name=models.CharField(max_length=200)
 	reg_number=models.CharField(max_length=50, unique=True)
@@ -60,8 +60,8 @@ class Course(models.Model):
 	test_score=models.PositiveIntegerField(default=0)
 	exam_score=models.PositiveIntegerField(default=0)
 	grade=models.CharField(max_length=20)
-	session=models.ForeignKey(AdmittedSession, null=True, blank=True, on_delete=models.CASCADE)
-	department=models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
+	session=models.ForeignKey(AdmittedSession, null=True, blank=False, on_delete=models.CASCADE)
+	department=models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=False)
 	# point=models.PositiveIntegerField(default=0)
 	created=models.DateTimeField(auto_now_add=True)
 

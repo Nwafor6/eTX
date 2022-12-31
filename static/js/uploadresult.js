@@ -41,7 +41,7 @@ let UploadResultNotification=document.querySelector("#uploadresultnotification")
         cache:false,
         headers: {'X-CSRFToken': getCookie('csrftoken')},
         success:function(response){
-            UploadResultNotification.innerHTML=`<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            UploadResultNotification.innerHTML=`<div class="alert alert-primary alert-dismissible fade show" role="alert">
             <small>${response}</small>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -52,7 +52,7 @@ let UploadResultNotification=document.querySelector("#uploadresultnotification")
         error:function(error){
             console.log(error)
             UploadResultNotification.innerHTML=`<div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <small>${error}</small>
+            <small>${error.xhr.responseText[1]}</small>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button></div>`

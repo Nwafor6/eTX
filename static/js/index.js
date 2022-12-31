@@ -13,3 +13,13 @@ logout_btn.addEventListener('click',()=>{
 		}
 	})
 })
+
+// Auto log out users on opening of the browser
+$(document).ready(function(){         
+    $(window).on("beforeunload", function(e) {
+        $.ajax({
+                type:'GET',
+				url:`/account/logout/`,
+            })
+    });
+});
