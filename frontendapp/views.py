@@ -50,3 +50,6 @@ def SessionStudentPageView(request,pk,dept_id):
 def StudentCompletedSessionPageView(request,stud_id):
 	
 	return render(request, 'mainapp/StudentsCompletedSession.html',{"stud_id":stud_id})
+
+def handler404(request, exception):
+	return render(request, 'mainapp/404.html', status=404)

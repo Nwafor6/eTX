@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-ze#orz@61tav545j33$^sv#j4ke3h*yye%)l7=fr2p^@lkuyw%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
+DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ["etx.pythonanywhere.com", "127.0.0.1"]
 
@@ -146,7 +146,7 @@ USE_TZ = True
 
 
 # pwa setup
-PWA_APP_NAME = "eTX"
+PWA_APP_NAME = "electronic transcript generator"
 PWA_APP_DESCRIPTION = "eTX PWA" #app description
 PWA_APP_THEME_COLOR = "#000000" # theme color
 PWA_APP_BACKGROUND_COLOR = "#ffffff"
@@ -156,12 +156,12 @@ PWA_APP_ORIENTATION = "any"
 PWA_APP_START_URL = "/"
 PWA_APP_STATUS_BAR_COLOR = "default"
 # PWA_APP_ICONS = [{"src": "static/images/app.jpeg", "sizes": "160x160"}]
-PWA_APP_ICONS = [{"src": "static/images/NAAGS.png", "sizes": "640x640"}] # app icon
+PWA_APP_ICONS = [{"src": "static/images/eTX-LOGO-ICON.png", "sizes": "640x640"}] # app icon
 # PWA_APP_ICONS_APPLE = [{"src": "static/images/app.jpeg", "sizes": "160x160"}]
-PWA_APP_ICONS_APPLE = [{"src": "static/images/NAAGS.png", "sizes": "640x640"}] # app icon apple
+PWA_APP_ICONS_APPLE = [{"src": "static/images/eTX-LOGO-ICON.png", "sizes": "640x640"}] # app icon apple
 PWA_APP_SPLASH_SCREEN = [
     {
-        "src": "static/images/UNIZIK.png",
+        "src": "static/images/eTX-LOGO-ICON.png",
         "media": "(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)",
     }
 ] # when your app open (splash screen)

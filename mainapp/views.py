@@ -426,3 +426,4 @@ class SearchStudent(generics.CreateAPIView):
 		serializer=ModifedCourseSerializer(courses, many=True)
 
 		return Response(serializer.data)
+
