@@ -81,10 +81,10 @@ let session_title=document.querySelector("#exampleInputUsername1").value
             ${response.created}
           </td>
            <td>
-                <a href="/v1/update_admittedsession/${response.id}/" class="btn btn-primary border-0 text-white">Edit</a>
+                 <button type="button" data-id="/v1/update_admittedsession/${response[i].id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
               </td>
               <td>
-                <a href="" class="btn btn-primary border-0 text-white">View</a>
+                <a href="/dept/${DepartmentId}/session/${response[i].id}/students/" class="btn btn-primary border-0 text-white">View</a>
               </td>
               <td>
                 <a href="" class="btn btn-danger border-0 text-white">Delete</a>
@@ -93,9 +93,15 @@ let session_title=document.querySelector("#exampleInputUsername1").value
 
 				`
 				addSessionForm.reset()
+				location.reload()
 		},
 		error:function(error){
-			alert("Session already exist")
+			console.log(error)
+			$("#createsessionnotification").html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <small>${error.statusText}, "check if this session already exist or contact ICT</small>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button></div>`)
 		}
 	})
 })
@@ -161,9 +167,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
 					success:function(response){
 						console.log(response)
 						updateSessionForm.reset()
+						location.reload()
 					},
 					error:function(err){
 						console.log(err)
+						$("#updatesessionnotification").html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <small>${err.responseJSON.session_title}</small>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button></div>`)
 					}
 			})
 		})

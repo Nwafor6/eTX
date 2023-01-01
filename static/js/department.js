@@ -1,7 +1,6 @@
 let sessions_holder=document.querySelector("#sessions_holder")
 let domain= document.querySelector("#domain").value
 let response_length=0;
-console.log("Hello workingxxx")
 
 // let clicked_session=document.querySelector(`#session${response[i].id}`)
 
@@ -42,6 +41,7 @@ $.ajax({
 	},
 	error:function(error){
 		console.log('erro',error)
+		
 	}
 })
 
@@ -71,10 +71,10 @@ let title=document.querySelector("#exampleInputUsername1").value
             ${response.title}
           </td>
            <td>
-                <a href="/v1/departments/${response.id}/" class="btn btn-primary border-0 text-white">Edit</a>
+                <button type="button" data-id="/v1/departments/${response[i].id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
               </td>
               <td>
-                <a href="" class="btn btn-primary border-0 text-white">View</a>
+                <a href="/sessions/${response.id}/" class="btn btn-primary border-0 text-white">View</a>
               </td>
               <td>
                 <a href="" class="btn btn-danger border-0 text-white">Delete</a>
@@ -86,6 +86,11 @@ let title=document.querySelector("#exampleInputUsername1").value
 		},
 		error:function(error){
 			console.log('erro',error)
+			$("#createdeptnotification").html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <small>${error.responseJSON.title}, contact ICT</small>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button></div>`)
 		}
 	})
 })
@@ -164,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
                 <button type="button" data-id="/v1/departments/${response.id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
               </td>
               <td>
-                <a href="/session/${response.id}/students/" class="btn btn-primary border-0 text-white">View</a>
+                <a href="/sessions/${response.id}/" class="btn btn-primary border-0 text-white">View</a>
               </td>
               <td data-id="${response.id}">
                 <form id="sessiondelform" action="/v1/delete_admittedsession/${response.id}/" method="DELETE" data-id="${response.id}">
@@ -179,6 +184,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
 					},
 					error:function(err){
 						console.log(err)
+						$("#updatedeptnotification").html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <small>${err.responseJSON.title}, contact ICT</small>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button></div>`)
 					}
 			})
 		})

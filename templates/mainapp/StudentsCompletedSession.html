@@ -38,8 +38,11 @@
                             Session
                           </th>
                           <th>
-                            Semester
+                            First Semester
                           </th>
+                          <th>
+                            Second Semester
+                          </th> 
                           <th>
                             Transcript
                           </th>              
@@ -56,141 +59,6 @@
           </div>
         </div>
 
-
-        <!-- Modal -->
-        <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable modal-xl">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Transcript</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" >
-                <div class="transcripts-table">
-                    <div class="col-lg-12 grid-margin stretch-card">
-                        <div class="card">
-                          <div class="card-body" id="courseholder">
-                            <div class="transcrript-heading text-center" >
-                              <h4 class="card-title " style="font-size: 12px !important; margin-bottom: 8px !important;">NNAMDI AZIKIWE UNIVERISTY, AWKA</h4>
-                              <h4 class="card-title " style="font-size: 12px !important; margin-bottom: 8px !important;">DEPARTMENT OF APPLIED GEOPHYSICS</h4>
-                              <h6 class="card-title " style="font-size: 12px !important; margin-bottom: 8px !important;">STUDENTS ACADEMIC RECORD</h6>
-                            </div>
-                            <div class="transcript-heading">
-                              <h6 class="card-title " style="font-size: 12px !important; margin-bottom: 8px !important;">NAME OF STUDENT: <span id="std_name"></span></h6>
-                              <div class="row">
-                                <div class="col-sm-6">
-                                  <h6 class="card-title " style="font-size: 12px !important; margin-bottom: 8px !important;">REG. NO: <span id="std_reg_num"> </span></h6>
-                                </div>
-                                <div class="col-sm-6">
-                                  <h6 class="card-title " style="font-size: 12px !important; margin-bottom: 8px !important;">YEAR OF STUDY:....................</h6>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <!-- <div class="col-sm-6">
-                                  
-                                </div> -->
-                                <div class="col-sm-6">
-                                  <h6 class="card-title " style="font-size: 12px !important; margin-bottom: 8px !important;">SESSION: <span id="session_"> </span></h6>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="table-responsive pt-3" id=first_semster_table>
-                              <h6>First Semester</h6>
-                              <table class="table table-bordered" style="font-size: 12px !important; margin-bottom: 8px !important;">
-                                <thead>
-                                  <tr>
-                                    <th>
-                                      S/N
-                                    </th>
-                                    <th>
-                                      Course Code
-                                    </th>
-                                    <th>
-                                      Course Title
-                                    </th>
-                                    <th>
-                                      Credit Load
-                                    </th>
-                                    <th>
-                                      Grade
-                                    </th>
-                                    <th>
-                                      Qty Point
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody id="transcript_body">
-                                         
-              
-                                </tbody>
-                                <tbody id="total_body">
-                                         
-              
-                                </tbody>
-                              </table>
-                            </div>
-
-                            <div class="table-responsive pt-3" id=ssecond_semster_table>
-                              <h6>Second Semester</h6>
-                              <table class="table table-bordered">
-                                <thead>
-                                  <tr>
-                                    <th>
-                                      S/N
-                                    </th>
-                                    <th>
-                                      Course Code
-                                    </th>
-                                    <th>
-                                      Course Title
-                                    </th>
-                                    <th>
-                                      Credit Load
-                                    </th>
-                                    <th>
-                                      Grade
-                                    </th>
-                                    <th>
-                                      Qty Point
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody id="Second_transcript_body">
-                                         
-              
-                                </tbody>
-                                 <tbody id="total_seon_body">
-                                         
-              
-                                </tbody>
-                              </table>
-                            </div>
-                            <div class="mt-5"><small style="float: right;">A=5,B=4,C=3,D=2,E=1,F=0.</small></div>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="transcrript-footer text-center">
-                        <div class="row">
-                          <div class="col-sm-6"><h6>GPA...........</h3></div>
-                            <div class="col-sm-6"><h6>Total...........</h3></div>
-                        </div>
-                      </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <span id="download_notification">
-                  <button type="button" class="btn btn-danger btn-icon-text" id="pdfButton"><i class="ti-download btn-icon-prepend"></i>Download</button>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
         <script src="{%static 'js/StudentsCompletedSession.js'%}"></script> 
          {%block script%}
 

@@ -51,5 +51,11 @@ def StudentCompletedSessionPageView(request,stud_id):
 	
 	return render(request, 'mainapp/StudentsCompletedSession.html',{"stud_id":stud_id})
 
+@login_required(login_url='login')
+def StudentTranscriptPageView(request,student_id,session_id):
+	
+	return render(request, 'mainapp/transcript.html',{"student_id":student_id,"session_id":session_id})
+
+
 def handler404(request, exception):
 	return render(request, 'mainapp/404.html', status=404)

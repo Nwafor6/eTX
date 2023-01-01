@@ -13,4 +13,6 @@ urlpatterns=[
 	path('dept/<dept_id>/session/<str:pk>/students/',views.SessionStudentPageView, name="SessionStudents"),
 	# view sessions compeleted by the student
 	path('student/<stud_id>/completed-session/',views.StudentCompletedSessionPageView, name="completed-session"),
+	# view all students result for a coomplete session in  a differnt view and age
+	path('transcript/student/<student_id>/session/<session_id>/allsemesters/',views.StudentTranscriptPageView, name="completed-session"),
 ]  
