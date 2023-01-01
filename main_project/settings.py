@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-ze#orz@61tav545j33$^sv#j4ke3h*yye%)l7=fr2p^@lkuyw%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
+DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ["etx.pythonanywhere.com", "127.0.0.1"]
 
@@ -66,9 +66,9 @@ MIDDLEWARE = [
 
 ]
 # production settings
-CSRF_COOKIE_SECURE=False
-SESSION_COOKIE_SECURE=False
-SECURE_SSL_REDIRECT=False
+CSRF_COOKIE_SECURE=True
+SESSION_COOKIE_SECURE=True
+SECURE_SSL_REDIRECT=True
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 
 CORS_ORIGIN_ALLOW_ALL=True
