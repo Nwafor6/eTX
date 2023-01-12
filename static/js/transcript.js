@@ -73,13 +73,13 @@ $.ajax({
                     
                   </td>
                   <td style="padding: 0.25rem  0.9375rem !important">
-                    <strong>Total Point: ${Ftotalpt}</strong>
+                    <strong>Total: ${Ftotalpt}</strong>
                   </td>
                   <td style="padding: 0.25rem  0.9375rem !important">
                     
                   </td>
                   <td style="padding: 0.25rem  0.9375rem !important">
-                    <strong>Total Q-Point: ${FtotalQpt}</strong>
+                    <strong>Total: ${FtotalQpt}</strong>
                   </td>
                 </tr>
 
@@ -130,13 +130,13 @@ $.ajax({
                 
               </td>
               <td style="padding: 0.25rem  0.9375rem !important">
-                <strong>Total Point: ${stotalpt}</strong>
+                <strong>Total: ${stotalpt}</strong>
               </td>
               <td style="padding: 0.25rem  0.9375rem !important">
                 
               </td>
               <td style="padding: 0.25rem  0.9375rem !important">
-                <strong>Total Q-Point: ${stotalQpt}</strong>
+                <strong>Total: ${stotalQpt}</strong>
               </td>
             </tr>
 
