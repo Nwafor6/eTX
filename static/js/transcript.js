@@ -14,7 +14,17 @@ $.ajax({
   url:`/v1/student/${StudentId}/session/${SessionId}/semester/1/`,
   success:function(res){
     console.log(res)
-    results=res
+    // Get the value for first and second semester 
+    // quality points and total points respectively and CGPA
+    FtotalQpt=res.FtotalQpt
+    Ftotalpt=res.Ftotalpt
+    stotalQpt=res.stotalQpt
+    stotalpt=res.stotalpt
+    results=res.serializer
+    cgpa=res.CGPA
+    // end  getting of values
+    //  Assign the cgpa value to the html holder
+    $("#cgpaHtmlHoder").text(`${cgpa}`)
     index=1
     index2=1
     results.forEach(result=>{
@@ -63,13 +73,13 @@ $.ajax({
                     
                   </td>
                   <td style="padding: 0.25rem  0.9375rem !important">
-                    <strong>Total Point:</strong>
+                    <strong>Total Point: ${Ftotalpt}</strong>
                   </td>
                   <td style="padding: 0.25rem  0.9375rem !important">
                     
                   </td>
                   <td style="padding: 0.25rem  0.9375rem !important">
-                    <strong>Total Q-Point:</strong>
+                    <strong>Total Q-Point: ${FtotalQpt}</strong>
                   </td>
                 </tr>
 
@@ -120,13 +130,13 @@ $.ajax({
                 
               </td>
               <td style="padding: 0.25rem  0.9375rem !important">
-                <strong>Total Point:</strong>
+                <strong>Total Point: ${stotalpt}</strong>
               </td>
               <td style="padding: 0.25rem  0.9375rem !important">
                 
               </td>
               <td style="padding: 0.25rem  0.9375rem !important">
-                <strong>Total Q-Point:</strong>
+                <strong>Total Q-Point: ${stotalQpt}</strong>
               </td>
             </tr>
 

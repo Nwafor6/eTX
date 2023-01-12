@@ -70,16 +70,15 @@ CSRF_COOKIE_SECURE=True
 SESSION_COOKIE_SECURE=True
 SECURE_SSL_REDIRECT=True
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+SECURE_HSTS_SECONDS =True
+SECURE_HSTS_INCLUDE_SUBDOMAINS =True
+SECURE_HSTS_PRELOAD =True
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL=False
 
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',  # for localhost (REACT Default)
-    'http://192.168.0.50:3000',  # for network
-    'http://localhost:8080',  # for localhost (Developlemt)
-    'http://192.168.0.50:8080',  # for network (Development)
-    'http://127.0.0.1:5500',
+    
 ]
 ROOT_URLCONF = 'main_project.urls'
 

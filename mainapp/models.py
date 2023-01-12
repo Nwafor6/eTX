@@ -10,7 +10,7 @@ class Department(models.Model):
 
 class AdmittedSession(models.Model):
 	session_title=models.CharField(max_length=100, unique=True, help_text="2018/2019")
-	department=models.ManyToManyField(Department, null=True, blank=True)
+	department=models.ManyToManyField(Department, blank=True)
 	created=models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):

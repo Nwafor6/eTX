@@ -1,4 +1,5 @@
 # from __future__ import unicode_literals
+import decimal
 from django.shortcuts import render
 from rest_framework.response import Response
 from django.db.models import Q
@@ -268,15 +269,26 @@ class StudentSemesterCourse(generics.RetrieveAPIView):
 		queryset=AdmittedSession.objects.get(id=self.kwargs['sess_id'])
 		# AllSemester=queryset.semester_set.all()
 		_courses=queryset.course_set.filter(Q(student=self.kwargs['pk'],session_id=self.kwargs['sess_id']))
-		# print(_courses)
-		# print(Student.objects.get(id=self.kwargs['pk']),"student")
-		# semester_title=Semester.objects.get(id=self.kwargs['sems_id'])
-		# print(semester_title.title,"jhhuhu")
-		# semester=Semester.objects.get(title=semester_title.title,session_id=self.kwargs['sess_id'],)
-		# print(semester)
-		# courses=semester.course_set.filter(student=self.kwargs['pk'], semester=semester )
+		first_total_point=0
+		first_total_quality_point=0
+		second_total_point=0
+		second_total_quality_point=0
+		for course in _courses:
+			if course.semester.title == "First Semester":
+				first_total_point +=course.credit_load
+				first_total_quality_point +=course.quality_point
+			else:
+				second_total_point +=course.credit_load
+				second_total_quality_point +=course.quality_point
+		# sum first and second semester total-pt and total qpoint to get CGPA
+		Max_total_point=first_total_point + second_total_point
+		Max_total_quality_point=first_total_quality_point + second_total_quality_point
+		# import division module to return a float
+		cgpa=(Max_total_quality_point/Max_total_point)
+		cgpa= '%.2f' % float(cgpa)
 		serializer=ModifedCourseSerializer(_courses, many=True)
-		return Response(serializer.data)
+		return Response({"Ftotalpt":first_total_point,"FtotalQpt":first_total_quality_point, "stotalpt":second_total_point, "stotalQpt": second_total_quality_point,"CGPA":cgpa, "serializer":serializer.data} )
+		# return Response(serializer.data)
 
 ########################################
 
