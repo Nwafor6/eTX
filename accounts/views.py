@@ -22,6 +22,7 @@ class Login(generics.CreateAPIView):
 		password=request.POST['password']
 
 		try:
+			print("hellp")
 			User.objects.get(email=email, is_staff=True)
 		except:
 			return Response("Error!! No such email or not a staff email")
@@ -29,7 +30,8 @@ class Login(generics.CreateAPIView):
 		user=authenticate(request,email=email, password=password)
 		if user is not None:
 			login(request,user)
-		return Response("Login Successful !!")
+			return Response("Login Successful !!")
+		return Response("Error!! No such email or not a staff email")
 
 
 @api_view(['GET'])
