@@ -33,8 +33,7 @@ $.ajax({
                 <a href="/dept/${DepartmentId}/session/${response[i].id}/students/" class="btn btn-primary border-0 text-white">View</a>
               </td>
               <td data-id="${response[i].id}">
-                <form id="sessiondelform" action="/v1/delete_admittedsession/${response[i].id}/" method="DELETE" data-id="${response[i].id}">
-                <input type="hidden">
+                <form id="sessiondelform" __action="/v1/delete_admittedsession/${response[i].id}/" method="DELETE" data-id="${response[i].id}">
                 <button type="submit" class="btn btn-danger border-0 text-white" data-id="${response[i].id}" id="ssessiondelbtn">Delete</button>
                 </form>
               </td
@@ -67,6 +66,7 @@ let session_title=document.querySelector("#exampleInputUsername1").value
 		},
 		dataType: 'json',
 		success:function(response){
+			console.log(response)
 
 				sessions_holder.innerHTML +=`
 
@@ -81,10 +81,10 @@ let session_title=document.querySelector("#exampleInputUsername1").value
             ${response.created}
           </td>
            <td>
-                 <button type="button" data-id="/v1/update_admittedsession/${response[i].id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
+                 <button type="button" data-id="/v1/update_admittedsession/${response.id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
               </td>
               <td>
-                <a href="/dept/${DepartmentId}/session/${response[i].id}/students/" class="btn btn-primary border-0 text-white">View</a>
+                <a href="/dept/${DepartmentId}/session/${response.id}/students/" class="btn btn-primary border-0 text-white">View</a>
               </td>
               <td>
                 <a href="" class="btn btn-danger border-0 text-white">Delete</a>
@@ -93,7 +93,7 @@ let session_title=document.querySelector("#exampleInputUsername1").value
 
 				`
 				addSessionForm.reset()
-				location.reload()
+				// location.reload()
 		},
 		error:function(error){
 			console.log(error)
@@ -217,11 +217,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
 			console.log(ssessiondelbtn_id)
 			let sessiondelform=document.querySelectorAll("#sessiondelform")
 			console.log(sessiondelform)
-
+		if(confirm('Sure want to delete this session?')){
 			for (let i=0; i<sessiondelform.length; i++){
 					sessiondelform[i].addEventListener("submit",e=>{
 					e.preventDefault()
-					if(confirm('Sure want to delete this session?')){
+					
 						$.ajax({
 						type:"DELETE",
 						url:`/v1/delete_admittedsession/${ssessiondelbtn_id}/`,
@@ -237,13 +237,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 						}
 					})
-
-					}
-
-
 			})
 
 			}
+		}
 
 		})
 	}

@@ -18,6 +18,8 @@ def registerpage(request):
 
 @login_required(login_url='login')
 def homepage(request):
+	if not request.user.is_authenticated:
+		return redirect("login")
 	return render(request, 'mainapp/index.html')
 
 @login_required(login_url='login')
