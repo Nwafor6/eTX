@@ -32,7 +32,7 @@ class Semester(models.Model):
 		return f"{self.title} | {self.session}"
 
 class Student(models.Model):
-	admitted_session=models.ForeignKey(AdmittedSession, on_delete=models.SET_NULL, null=True, blank=False)
+	admitted_session=models.ForeignKey(AdmittedSession, on_delete=models.CASCADE, null=True, blank=False)
 	department=models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
 	name=models.CharField(max_length=200)
 	reg_number=models.CharField(max_length=50, unique=True)
