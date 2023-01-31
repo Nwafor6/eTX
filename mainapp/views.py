@@ -269,6 +269,7 @@ class StudentSemesterCourse(generics.RetrieveAPIView):
 		queryset=AdmittedSession.objects.get(id=self.kwargs['sess_id'])
 		# AllSemester=queryset.semester_set.all()
 		_courses=queryset.course_set.filter(Q(student=self.kwargs['pk'],session_id=self.kwargs['sess_id']))
+		student=Student.objects.get(id=self.kwargs['pk'])
 		first_total_point=0
 		first_total_quality_point=0
 		second_total_point=0
@@ -287,7 +288,7 @@ class StudentSemesterCourse(generics.RetrieveAPIView):
 		cgpa=(Max_total_quality_point/Max_total_point)
 		cgpa= '%.2f' % float(cgpa)
 		serializer=ModifedCourseSerializer(_courses, many=True)
-		return Response({"Ftotalpt":first_total_point,"FtotalQpt":first_total_quality_point, "stotalpt":second_total_point, "stotalQpt": second_total_quality_point,"CGPA":cgpa, "serializer":serializer.data} )
+		return Response({"Ftotalpt":first_total_point,"FtotalQpt":first_total_quality_point, "stotalpt":second_total_point, "stotalQpt": second_total_quality_point,"CGPA":cgpa, "serializer":serializer.data,"student_addmitted_seesion":student.admitted_session.session_title} )
 		# return Response(serializer.data)
 
 ########################################
