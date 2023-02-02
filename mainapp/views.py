@@ -4,6 +4,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
+from rest_framework import status
 from rest_framework import generics, viewsets
 from django.db import transaction
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -40,7 +41,10 @@ class CreateAdmittedSession(generics.ListCreateAPIView):
 	def post(self, request, *args, **kwargs):
 		session_title=request.POST["session_title"]
 		if Department.objects.all().count() > 0:
-			admitted_session=AdmittedSession.objects.create(session_title=session_title)
+			try:
+				admitted_session=AdmittedSession.objects.create(session_title=session_title)
+			except:
+				return Response({"detail":'Session already exist'}, status=status.HTTP_400_BAD_REQUEST)
 			Semester.objects.create(title="First Semester", session=admitted_session)
 			Semester.objects.create(title="Second Semester", session=admitted_session)
 			for department in Department.objects.all():
@@ -48,7 +52,7 @@ class CreateAdmittedSession(generics.ListCreateAPIView):
 			serializer=self.serializer_class(admitted_session, many=False)
 			return Response(serializer.data)
 		else:
-			return Response({'session_title':"You have to create Departments first !!"})
+			return Response({'detail':"You have to create Departments first !!"},status=status.HTTP_400_BAD_REQUEST)
 
 class UpdateAdmittedSession(generics.RetrieveUpdateAPIView):
 	queryset=AdmittedSession.objects.all()

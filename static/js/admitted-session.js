@@ -98,7 +98,7 @@ let session_title=document.querySelector("#exampleInputUsername1").value
 		error:function(error){
 			console.log(error)
 			$("#createsessionnotification").html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <small>${error.statusText}, "check if this session already exist or contact ICT</small>
+        <small>${error.responseJSON.detail}</small>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button></div>`)

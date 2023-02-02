@@ -71,7 +71,7 @@ let title=document.querySelector("#exampleInputUsername1").value
             ${response.title}
           </td>
            <td>
-                <button type="button" data-id="/v1/departments/${response[i].id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
+                <button type="button" data-id="/v1/departments/${response.id}/" class="btn btn-primary border-0 text-white sessionsbtn" data-toggle="modal" data-target="#updatesession">Edit <i class="ti-file btn-icon-append"></i></button>
               </td>
               <td>
                 <a href="/sessions/${response.id}/" class="btn btn-primary border-0 text-white">View</a>

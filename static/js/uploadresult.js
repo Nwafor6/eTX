@@ -108,7 +108,7 @@ let session_title=document.querySelector("#session_title").value
         error:function(error){
             console.log(error)
             document.querySelector("#addsessionnotification").innerHTML=`<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <small>${error.statusText}, Contact ICT for help or reload your browser and try again</small>
+            <small>${error.responseJSON.detail}</small>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button></div>`
