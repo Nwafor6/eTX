@@ -82,6 +82,10 @@ urlpatterns = [
 	#view all courses in the semester the student has completed#################
 	path('student/<str:pk>/session/<str:sess_id>/semester/<str:sems_id>/', views.StudentSemesterCourse.as_view()),
 	########################################
+	#
+	##############################
+	# View the students CGPA for each semesters and sessions 
+	path("student/cgpa/<str:pk>/", views.GetStudentCGPA.as_view()),
 
 
 	path('upload/', views.examFieldUpload.as_view()),

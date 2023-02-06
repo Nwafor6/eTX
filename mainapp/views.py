@@ -11,12 +11,13 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view
 from .resources import StudentResources
 from tablib import Dataset
-from .models import (AdmittedSession,Semester,Student,SessionCompleted,Course,Department)
+from .models import (AdmittedSession,Semester,Student,SessionCompleted,Course,Department, CGPA)
 from .serializers import (DepartmentSerializer,AdmittedSessionSerializer,SemesterSerializer,StudentSerializer,SessionCompletedSerializer,CourseSerializer, 
 	ExamFieldUploadSerializer,SudentFieldUploadSerializer,SearchSudentSerializer,ModifedAdmittedSessionSerializer)
-
+# importing credit load checker function to prevent upload of result
+from .import utils
 # extra serializer imports
-from .serializers import studentCompletedSerializer,StudentSemesterSerializer,ModifedCourseSerializer
+from .serializers import studentCompletedSerializer,StudentSemesterSerializer,ModifedCourseSerializer,StudentCGPASerializer
 
 
 
@@ -41,8 +42,17 @@ class CreateAdmittedSession(generics.ListCreateAPIView):
 	def post(self, request, *args, **kwargs):
 		session_title=request.POST["session_title"]
 		if Department.objects.all().count() > 0:
+			order=0
 			try:
-				admitted_session=AdmittedSession.objects.create(session_title=session_title)
+				# Check if any session has previously been created to escape error
+				if AdmittedSession.objects.all().exists():
+					print("hello")
+					order=AdmittedSession.objects.last().order+1
+
+				# If no session, set the first order=0 
+				else:
+					order=0
+				admitted_session=AdmittedSession.objects.create(session_title=session_title, order=order)
 			except:
 				return Response({"detail":'Session already exist'}, status=status.HTTP_400_BAD_REQUEST)
 			Semester.objects.create(title="First Semester", session=admitted_session)
@@ -271,9 +281,16 @@ class StudentSemesterCourse(generics.RetrieveAPIView):
 
 	def get(self, request, *args, **kwargs):
 		queryset=AdmittedSession.objects.get(id=self.kwargs['sess_id'])
+		print(queryset.order)
 		# AllSemester=queryset.semester_set.all()
 		_courses=queryset.course_set.filter(Q(student=self.kwargs['pk'],session_id=self.kwargs['sess_id']))
 		student=Student.objects.get(id=self.kwargs['pk'])
+
+		# Get all sesssion starting from the student's admitted session. 
+		session=[session for session in AdmittedSession.objects.all() if session.id >= student.admitted_session_id]
+		course=Course.objects.filter(student=student)
+		# End get all session starting from the students admitted sessions
+
 		first_total_point=0
 		first_total_quality_point=0
 		second_total_point=0
@@ -290,13 +307,35 @@ class StudentSemesterCourse(generics.RetrieveAPIView):
 		Max_total_quality_point=first_total_quality_point + second_total_quality_point
 		# import division module to return a float
 		cgpa=(Max_total_quality_point/Max_total_point)
-		cgpa= '%.2f' % float(cgpa)
+		cgpa= '%.2f' % float(cgpa)#this cgpa is for just the current academic session 
 		serializer=ModifedCourseSerializer(_courses, many=True)
-		return Response({"Ftotalpt":first_total_point,"FtotalQpt":first_total_quality_point, "stotalpt":second_total_point, "stotalQpt": second_total_quality_point,"CGPA":cgpa, "serializer":serializer.data,"student_addmitted_seesion":student.admitted_session.session_title} )
+
+		######################################### #This session brings the student's gpa for the previus sessions, add and computes the CGPA  
+		# Filter GPA for the previous session that belongs to the student
+		brought_fwd_gpa=CGPA.objects.filter(Q(student=self.kwargs['pk'], session__order__lt=queryset.order))
+		brought_fwd_gpa_serializer=StudentCGPASerializer(brought_fwd_gpa, many=True)
+		total_brought_fwd_gpa=0
+		total_brought_cgpa=cgpa # set total_brought_cgpa=CGPA of the intinal session  so as to be used incase the output in the forloop returns zero(0)
+		# Calculate the entire GPA for the previous session and find the average by dividing by the total count of sessions to produce the CGPS
+		if brought_fwd_gpa:
+			for _gpa in brought_fwd_gpa:
+				print(_gpa.gpa,"gpa output")
+				total_brought_fwd_gpa +=_gpa.gpa
+			total_brought_cgpa='%.2f' % float(total_brought_fwd_gpa/brought_fwd_gpa.count()) # Here we divided the total GPA by the total number of academic sessions. This produces the students CGPA 
+		return Response({"final_CGPA":total_brought_cgpa, "student_cgpa":brought_fwd_gpa_serializer.data,"Ftotalpt":first_total_point,"FtotalQpt":first_total_quality_point, "stotalpt":second_total_point, "stotalQpt": second_total_quality_point,"CGPA":cgpa, "serializer":serializer.data,"student_addmitted_seesion":student.admitted_session.session_title} )
 		# return Response(serializer.data)
 
 ########################################
 
+class GetStudentCGPA(generics.ListAPIView):
+	serializer_class=StudentCGPASerializer
+	queryset=CGPA.objects.all()
+	permission_classes=[IsAuthenticated]
+
+	def get(self, request, *args, **kwargs):
+		queryset=CGPA.objects.filter(student=self.kwargs['pk'])
+		serializer=self.serializer_class(queryset, many=True)
+		return Response({"detail":serializer.data})
 
 
 # #view to allow upload of student in excel document
@@ -374,7 +413,7 @@ class examFieldUpload(generics.CreateAPIView):
 				course_code=data[2]
 				credit_load=data[3]
 				semester=data[4]
-				print(semester)
+				# print(semester)
 				student=data[6]
 				test_score=data[7]
 				exam_score=data[8]
@@ -410,25 +449,49 @@ class examFieldUpload(generics.CreateAPIView):
 					transaction.set_rollback(True)# roll back if this error causes error
 					return Response(f"Student with the Registration number {student} does not exist")
 				
-				print(data[1], data[2], data[3],data[4],data[5],data[6], data[7],data[9], data[10])
-				coure=Course.objects.create(
+				# print(data[1], data[2], data[3],data[4],data[5],data[6], data[7],data[9], data[10])
 
-						course_title=course_title,
-						course_code=course_code,
-						credit_load=credit_load,
-						semester=semester,
-						student=student,
-						test_score=test_score,
-						exam_score=exam_score,
-						grade=grade,
-						session=session,
-						department=department
+				#####################################
+				# Checks to make sure the test is >=30 and exam <=100
+				if test_score >30 or test_score < 0 :
+					transaction.set_rollback(True)
+					return Response(f"upload failed because {student}'s test score '{test_score}' is invalid")
+				if exam_score >70 or exam_score < 0:
+					transaction.set_rollback(True)
+					return Response(f"upload failed because {student}'s exam score '{exam_score}' is invalid ")
+				####################################################################
 
+				# check if the student has exceeded the credit load limit before creating first
+				if utils.creditLoadLimitChecker(session.id, semester.id, student.id) == True:
+					if utils.checkCourseEixistence(course_code,session.id, student.id, semester.id) == True: 
+						return Response(f"upload failed because {student} has this result already")
+					course=Course.objects.create(
 
-					)
+							course_title=course_title,
+							course_code=course_code,
+							credit_load=credit_load,
+							semester=semester,
+							student=student,
+							test_score=test_score,
+							exam_score=exam_score,
+							grade=utils.gradeCalulator(test_score,exam_score),
+							session=session,
+							department=department
+						)
+					try:
+						student_cgpa=CGPA.objects.get(session=session,student=student)
+					except:
+						student_cgpa=CGPA.objects.create(session=session,student=student)
+					student_cgpa.gpa = utils.cgpaCalculator(student=student.id,session=session.id)
+					student_cgpa.save()
+
+				else:
+					transaction.set_rollback(True)
+					return Response(f"upload failed because {student} exceeded credit load")
 				count+=1
 			return Response(f"upload complete !!! Total= {count}")
 		return Response(f"An error occoured")
+
 
 #search student by reggistration number and display all courses
 class SearchStudent(generics.CreateAPIView):

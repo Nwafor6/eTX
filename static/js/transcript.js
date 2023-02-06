@@ -27,7 +27,11 @@ $.ajax({
     results=res.serializer
     YearOfAdmission=res.student_addmitted_seesion
     cgpa=res.CGPA
+
+    //Populate the acadmic CGPA select tag of each session from the response 
+    $("#Final_cgpaHtmlHoder").text(res.final_CGPA);
     // end  getting of values
+
     //  Assign the cgpa value to the html holder
     $("#cgpaHtmlHoder").text(`${cgpa}`)
     index=1
@@ -45,6 +49,8 @@ $.ajax({
       document.getElementById("excel-std-name").innerText=result.student.name;
       document.getElementById("excel-std-reg-no").innerText=result.student.reg_number
       // End major excel ouput data
+      
+      // End populate acadmic CGPA select tag
       if(result.semester.title=="First Semester"){
 
 
@@ -267,6 +273,4 @@ $("#excelButton").click(function(){
 
     , 6000)
 });
-
-
 

@@ -40,38 +40,62 @@ login_form.addEventListener('submit',e=>{
 			dataType:'json',
 			success: function(response){
 				console.log(response)
-				if(response=="Login Successful !!"){
-					LoginResponse.innerHTML=`<div class="alert alert-primary" role="alert" id="login-success" >
-                    ${response}
-                  </div>`
-				  $("#loginMessage").html(`<div class="alert alert-success" role="alert" id="login-success" >
-                    ${response}
-                  </div>`)
+				LoginResponse.innerHTML=`<div class="alert alert-primary" role="alert" id="login-success" >
+                ${response}
+              </div>`
+			  $("#loginMessage").html(`<div class="alert alert-success" role="alert" id="login-success" >
+                ${response}
+              </div>`)
 
 
-					login_btn.style.display="none"
-					// login_success.style.display="block"
-					console.log(response)
-					setTimeout(()=>{
-						LoginResponse.innerHTML=`<button type="submit" class="btn btn-block btn-facebook auth-form-btn" id="login-btn">
-						Sign In
-					</button>`
-					},1000)
-					window.location.replace("")
-
-				}else{
-					$("#loginMessage").html(`<div class="alert alert-danger" role="alert" id="login-success" >
-                    ${response}
-                  </div>`)
-				}
+				login_btn.style.display="none"
+				// login_success.style.display="block"
+				console.log(response)
+				setTimeout(()=>{
+					LoginResponse.innerHTML=`<button type="submit" class="btn btn-block btn-facebook auth-form-btn" id="login-btn">
+					Sign In
+				</button>`
+				},1000)
+				window.location.replace("")
 				
 			},
 			error:function(error){
 				console.log(error)
-				// LoginResponse.innerHTML=``
+				$("#loginMessage").html(`<div class="alert alert-danger" role="alert" id="login-success" >
+                    ${error.responseJSON.detail}
+                  </div>`)
 			}
 		}
 
 		)
 
 })
+
+// success: function(response){
+// 				console.log(response)
+// 				if(response=="Login Successful !!"){
+// 					LoginResponse.innerHTML=`<div class="alert alert-primary" role="alert" id="login-success" >
+//                     ${response}
+//                   </div>`
+// 				  $("#loginMessage").html(`<div class="alert alert-success" role="alert" id="login-success" >
+//                     ${response}
+//                   </div>`)
+
+
+// 					login_btn.style.display="none"
+// 					// login_success.style.display="block"
+// 					console.log(response)
+// 					setTimeout(()=>{
+// 						LoginResponse.innerHTML=`<button type="submit" class="btn btn-block btn-facebook auth-form-btn" id="login-btn">
+// 						Sign In
+// 					</button>`
+// 					},1000)
+// 					window.location.replace("")
+
+// 				}else{
+// 					$("#loginMessage").html(`<div class="alert alert-danger" role="alert" id="login-success" >
+//                     ${response}
+//                   </div>`)
+// 				}
+				
+// 			},

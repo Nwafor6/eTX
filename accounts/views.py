@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.decorators import api_view
 from .serializers import StaffsignupSerializer,LoginSerializer
 from django.contrib.auth import authenticate, login, logout
@@ -31,7 +32,7 @@ class Login(generics.CreateAPIView):
 		if user is not None:
 			login(request,user)
 			return Response("Login Successful !!")
-		return Response("Error!! No such email or not a staff email")
+		return Response({"detail": "No such email or not a staff email"},status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

@@ -6,6 +6,7 @@ Student,
 SessionCompleted,
 Course,
 Department,
+CGPA,
 )
 
 
@@ -44,6 +45,14 @@ class StudentSerializer(serializers.ModelSerializer):
 		model=Student
 		fields=['id','department','admitted_session','name','reg_number','created']
 		extra_kwargs={'id':{'read_only':True},}
+
+class StudentCGPASerializer(serializers.ModelSerializer):
+	# semester=SemesterSerializer(many=False)
+	session=AdmittedSessionSerializer(many=False)
+	student=StudentSerializer(many=False)
+	class Meta:
+		model=CGPA
+		fields=["session","student", "gpa"]
 
 # uncomment this to show the related fields in theri __unicode than id ###
 class SessionCompletedSerializer(serializers.ModelSerializer):

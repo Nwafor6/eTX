@@ -11,6 +11,7 @@ class Department(models.Model):
 class AdmittedSession(models.Model):
 	session_title=models.CharField(max_length=100, unique=True, help_text="2018/2019")
 	department=models.ManyToManyField(Department, blank=True)
+	order=models.PositiveIntegerField(default=0, blank=True, null=True, unique=True)
 	created=models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
@@ -41,6 +42,15 @@ class Student(models.Model):
 	def __str__(self):
 		return f"{self.name} | {self.reg_number}"
 
+# Models to keep track of the student's gpa
+class CGPA(models.Model):
+	session=models.ForeignKey(AdmittedSession, on_delete=models.CASCADE, null=True, blank=True)
+	# semester=models.ForeignKey(Semester, on_delete=models.CASCADE, null=True, blank=True)
+	student=models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True)
+	gpa=models.PositiveIntegerField(default=0, blank=True, null=True)
+
+	def __str__(self):
+		return f"{self.student} | {self.session} | {self.gpa}"
 
 class SessionCompleted(models.Model):
 	session_title=models.ForeignKey(AdmittedSession, on_delete=models.CASCADE, null=True, blank=True)
