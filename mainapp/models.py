@@ -11,7 +11,7 @@ class Department(models.Model):
 class AdmittedSession(models.Model):
 	session_title=models.CharField(max_length=100, unique=True, help_text="2018/2019")
 	department=models.ManyToManyField(Department, blank=True)
-	order=models.PositiveIntegerField(default=0, blank=True, null=True, unique=True)
+	order=models.PositiveIntegerField(default=1, blank=True, null=True, unique=True)
 	created=models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
