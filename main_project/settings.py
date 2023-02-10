@@ -104,13 +104,22 @@ WSGI_APPLICATION = 'main_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Transcript_db',
+        'USER': 'nwaforglory6@gmail.com',
+        'PASSWORD': 'Nwafor6.com',
+        'HOST': '181.215.242.78',
+        'PORT': '13873',
     }
 }
-
 AUTH_USER_MODEL="accounts.CustomUser"
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 # Password validation
