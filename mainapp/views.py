@@ -223,23 +223,8 @@ class AdmittedSessionStudents(generics.RetrieveUpdateAPIView):
 ########################################
 
 
-# # view all sessions completed by the student ######
-# class StudentCompletedSession(generics.RetrieveAPIView):
-# 	queryset=Student.objects.all()
-# 	serializer_class=StudentSerializer
-# 	permission_classes=[IsAuthenticated]
-
-# 	def get(self, request, *args, **kwargs):
-# 		queryset=Student.objects.get(id=self.kwargs['pk'])
-# 		studentcompletedsessions=queryset.sessioncompleted_set.all()
-# 		print(studentcompletedsessions)
-# 		serializer=studentCompletedSerializer(studentcompletedsessions, many=True)
-
-# 		return Response(serializer.data)
 
 # ########################################
-
-
 
 # view all sessions completed by the student 
 class StudentCompletedSession(generics.RetrieveAPIView):
